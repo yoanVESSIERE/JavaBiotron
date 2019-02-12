@@ -2,7 +2,6 @@ import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Scanner;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,14 +13,14 @@ import java.io.File;
 import java.io.IOException;
 
 public class class1 extends JPanel {
-
+	private static Combat com = new Combat();
 	public static void main(String[] args) throws IOException, InterruptedException {
     	Fenetre fen = new Fenetre();
     	fen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    aventure();
+	    aventure(fen);
 	}
 	
-	static void aventure() throws InterruptedException {
+	static void aventure(Fenetre fen) throws InterruptedException {
 		int a = 1;
 
 		Scanner sc = new Scanner(System.in);
@@ -86,11 +85,12 @@ public class class1 extends JPanel {
 		}
 		System.out.print("\n\nUne force se ressens à l'extérieur mais tu n'arrive pas à savoir de quoi il s'agit\n");
 		Thread.sleep(1000);
+		fen.setContentPane(com);
+	    fen.setVisible(true);
 		System.out.print("Que fais tu ?\n");
 		
 	}
 }
-
 class stats {
 	
 	static int force = 0;
@@ -99,12 +99,11 @@ class stats {
 		
 }
 
-	
 class Fenetre extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public final static int HT = 1920;
 	public final static int LG = 700;
-	private Panneau pan = new Panneau();
+	private static Debut deb = new Debut();
 		
 	  public Fenetre(){
 	    this.setTitle("BioTron");
@@ -114,32 +113,41 @@ class Fenetre extends JFrame {
 	    //this.setLocationRelativeTo(null);
 	    //JPanel pan = new JPanel();
 	    //pan.setBackground(Color.ORANGE);
-	    this.setContentPane(pan);            
+	    this.setContentPane(deb);
 	    this.setVisible(true);
 	  }
 	}
 
-class Panneau extends JPanel { 
-	private static final long serialVersionUID = 1L;
-	private int posX = -50;
-	private int posY = -50;
-
-	public void paintComponent(Graphics g){
-		try {
-			int re = 0;
-			Image dec = ImageIO.read(new File("Image/plaine.png"));
-			Image her = ImageIO.read(new File("Image/hero.png"));
-			Image sli = ImageIO.read(new File("Image/slime.png"));
-			Image slime = ImageIO.read(new File("Image/slime2.png"));
-		    g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
-		    g.drawImage(her, 1100, 290, this);
-		    g.drawImage(sli, 550, 390, this);
-			} catch (IOException e) {
-			e.printStackTrace();
+class Combat extends JPanel { 
+		private static final long serialVersionUID = 1L;
+		  
+		  public void paintComponent(Graphics g){
+			  try {
+				  int re = 0;
+			      Image dec = ImageIO.read(new File("Image/plaine.png"));
+			      Image her = ImageIO.read(new File("Image/hero.png"));
+			      Image sli = ImageIO.read(new File("Image/slime.png"));
+			      Image slime = ImageIO.read(new File("Image/slime2.png"));
+			      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
+			      g.drawImage(her, 1100, 290, this);
+			      g.drawImage(sli, 550, 390, this);
+			    } catch (IOException e) {
+			      e.printStackTrace();
 		  }               
 		}
 	}
-
+class Debut extends JPanel { 
+	private static final long serialVersionUID = 1L;
+	  
+	  public void paintComponent(Graphics g){
+		  try {
+		      Image dec = ImageIO.read(new File("Image/imagebkB.png"));
+		      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
+		    } catch (IOException e) {
+		      e.printStackTrace();
+	  }               
+	}
+}
 	class ImagePane extends JPanel {
 	    
 	    private static final long   serialVersionUID    = 1L;
