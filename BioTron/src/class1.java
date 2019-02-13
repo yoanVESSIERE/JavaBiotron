@@ -98,6 +98,7 @@ public class class1 extends JPanel {
 	
 	static void village() throws InterruptedException {
 		Scanner sc = new Scanner(System.in);
+		int a = 0;
 		
 		for (int i = 0; i < 50; ++i) System.out.println();
 		System.out.print("Le calme reviens, les habitants te remercie et reprennent leur occupation respective...");
@@ -117,8 +118,60 @@ public class class1 extends JPanel {
 				System.out.print("\n-> Tapez pnj pour voir parler aux personnes aux alentours");
 				System.out.print("\n-> Tapez market pour accéder au marché du village\n");
 			}
+			if (str.equals("inv")) {
+				System.out.print("\n\nVous disposez de ");
+				System.out.print(perso.gold);
+				System.out.print(" Golds et de ");
+				System.out.print(perso.ame);
+				System.out.print(" Âme");
+				System.out.print("\nVous êtes équipé de : ");
+				System.out.print(perso.weapon);
+				System.out.print("\n");
+				for (int e = 0; perso.inv[e] != null; e++) {
+					System.out.print("Inventaire :\n--->");
+					System.out.print(perso.tab_inv[e]);
+					System.out.print(" ");
+					System.out.print(perso.inv[e]);
+		        }
+			}
+			if (str.equals("stat")) {
+				System.out.print("\n\nForce de votre personnage: ");
+				System.out.print(Stats.force);
+				System.out.print("\nIntelligence de votre personnage: ");
+				System.out.print(Stats.intelligence);
+				System.out.print("\nDéfense de votre personnage: ");
+				System.out.print(Stats.defense);
+			}
+			if (str.equals("statw")) {
+				System.out.print("\n\nForce de votre arme: ");
+				System.out.print(weapon.force);
+				System.out.print("\nIntelligence de votre arme: ");
+				System.out.print(weapon.intelligence);
+				System.out.print("\nDéfense de votre arme: ");
+				System.out.print(weapon.defense);
+			}
+			if (str.equals("pnj") && a == 0) {
+				System.out.print("\n\nVous vous approchez des villageois,");
+				Thread.sleep(1000);
+		        System.out.print("\nBonjour ");
+		        System.out.print(perso.nom);
+		        System.out.print("Je suis Meunier, le meunier du village, et j'ai entendu une rumeur comme quoi un dragon était dans les parages !!");
+		        System.out.print("\nOccupez vous de lui et je vous offrirais une récompense !");
+		        a = 1;
+			}
+			if (str.equals("quest") && a == 0) {
+				System.out.print("\n\nVous n'avez aucune quête, parlez aux villageois !");
+			}
+			if (str.equals("quest") && a == 1) {
+				Thread.sleep(1000);
+				for (int i = 0; i < 50; ++i) System.out.println();
+				System.out.print("C'est parti, vous prenez votre courage à deux mains et partez détruire ce dragon !");
+				Thread.sleep(1000);
+				quest();
+			}
 		}
 	}
+	
 	static void one_by_one(String str) throws InterruptedException {
 		int i = 0;
 		int nb = 0;
@@ -129,6 +182,78 @@ public class class1 extends JPanel {
 			Thread.sleep(90);
 		}
 	}
+	
+	static void quest() throws InterruptedException {
+		Scanner sc = new Scanner(System.in);
+		
+		one_by_one("\n\nVous vous retrouvez à une intersection, à droite ce trouve un long chemin contournant la forêt");
+		one_by_one(" et à gauche un chemin rapide traversant directement la forêt, mais ce chemin vous angoisse...");
+		Thread.sleep(1000);
+	    one_by_one("\nQue fait tu ?\n");
+	    one_by_one("-Prendre le long chemin {1}\n");
+	    one_by_one("-Prendre le court chemin {2}\n");
+	    one_by_one("-Retourner au village {3}");
+	    one_by_one("\n\nje choisis: ");
+	    String str = sc.nextLine();
+	    while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2 && Integer.parseInt(str) != 3) {
+			one_by_one("Mauvais choix\n\n\n");
+			one_by_one("\nje choisis: ");
+			str = sc.nextLine();
+		}
+	    if (Integer.parseInt(str) == 1) {
+	    	chemin_long();
+	    }
+	    if (Integer.parseInt(str) == 2) {
+	    	
+	    }
+	    if (Integer.parseInt(str) == 3) {
+	    	one_by_one("\nTu ne te sens pas prêt à affronté le dragon, tu rebrousses chemin...");
+	    	Thread.sleep(1000);
+	        one_by_one("\nTe revoilà au village !");
+	    	return;
+	    }
+	}
+	static void chemin_long() throws InterruptedException {
+		Scanner sc = new Scanner(System.in);
+		
+		one_by_one("\nTu choisis de contourner la fôret pour retrouver le dragon.\n");
+		Thread.sleep(1000);
+		one_by_one("En marchant sur la route menant au dragon, tu vois que le chemin traverse un petit village.\n");
+		Thread.sleep(1000);
+		one_by_one("Lorsque tu te rapproche du village, un silence pesant s'impose. Personne dehors, aucune fumée qui vient des cheminées et même la taverne, un lieu toujours animée, est particulièrement silencieuses.\n");
+		Thread.sleep(1000);
+		one_by_one("Tu décides d'entrer dans la taverne pour vérifier si il n'y avait pas quelque chose à boire. En rentrant, personne était là.\n");
+		Thread.sleep(1000);
+		one_by_one("En cherchant à boire et à manger, tu entends un bruit venu d'une des chambres. Tu décide de vérifier de quoi il s'agit.\n");
+		Thread.sleep(1000);
+		one_by_one("Tu entends quelqu'un frapper sur une des portes mais quand tu essayes d'ouvrir la porte, un squelette sort brusquement de la chambre !\n");
+		Thread.sleep(1000);
+		one_by_one("L'escalier étant derrière le squelette, la seule option est de se battre avec lui !\n");
+		Thread.sleep(1000);
+		//combat squelette
+		one_by_one("Une fois le squelette battu, tu as à peine le temps de récupérer ton souffle, que t'entends d'autres coups et bruits venant des autres chambres.\n");
+		Thread.sleep(1000);
+		one_by_one("une fois en bas des escaliers tu vois que des squelettes venu du bâtiment d'en face essayent de casser la porte principale.\n");
+		Thread.sleep(1000);
+		one_by_one("Tu cherches une autre sortie, et par miracle tu trouves dans la cave de la taverne une sortie remontant à l'arrière de la taverne. Tu arrive à t'échaper du village sans te faire remarquer.\n");
+		Thread.sleep(1000);
+		one_by_one("Après avoir marcher pendant quelques heures encore, tu te sens épuisé. Tu vois un espace recouvert par les arbres qui est assez confortable pour te reposer la nuit.\n");
+		Thread.sleep(1000);
+		one_by_one("Que fais tu ?\n");
+		one_by_one("Je me repose {1}\n");
+		one_by_one("Je continue {2}");
+		one_by_one("\n\nje choisis: ");
+		String str = sc.nextLine();
+		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
+			one_by_one("Mauvais choix\n\n\n");
+			one_by_one("\nje choisis: ");
+			str = sc.nextLine();
+		}
+		if (Integer.parseInt(str) == 1) {
+			one_by_one("Tu te réveilles le lendemain, prêt à partir combattre ! **Force +1**");
+			Stats.force += 1;
+		}
+    }
 }
 class Stats {
 	
@@ -147,20 +272,20 @@ class weapon {
 
 class perso {
 	
-	String nom;
-	int sexe;
-	String weapon;
-	int vie;
-	int vie_max;
-	String statut;
-    int gold;
-    String spell[];
-    String inv[];
-    int tab_inv[];
-    int expe;
-    int level;
-    int exp_need;
-    int ame;
+	static String nom;
+	static int sexe;
+	static String weapon;
+	static int vie;
+	static int vie_max;
+	static String statut;
+	static int gold;
+	static String spell[];
+	static String inv[];
+	static int tab_inv[];
+	static int expe;
+	static int level;
+	static int exp_need;
+	static int ame;
 	
 }
 
