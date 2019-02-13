@@ -1,19 +1,15 @@
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.JTextField;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
 public class class1 extends JPanel {
 	private static Combat com = new Combat();
+	private static Dej dej = new Dej();
 	public static void main(String[] args) throws IOException, InterruptedException {
     	Fenetre fen = new Fenetre();
     	fen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,72 +20,80 @@ public class class1 extends JPanel {
 		int a = 1;
 
 		Scanner sc = new Scanner(System.in);
-		village();
-		System.out.println("Salut toi,");
+		one_by_one("Salut toi,\n");
 		Thread.sleep(1000);
-		System.out.println("Ton aventure commence !!!");
+		one_by_one("Ton aventure commence !!!\n");
 		Thread.sleep(1000);
-		System.out.println("Mais avant tout, es tu:\n");
+		one_by_one("Mais avant tout, es tu:\n\n");
 		Thread.sleep(1000);
-		System.out.println("-Un Homme {1}");
+		one_by_one("-Un Homme {1}\n");
 		Thread.sleep(1000);
-		System.out.println("-Une Femme {2}");
+		one_by_one("-Une Femme {2}\n");
 		Thread.sleep(1000);
-		System.out.print("\nje choisis: ");
+		one_by_one("\nje choisis: ");
 		String str = sc.nextLine();
 		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
-			System.out.println("Mauvais choix\n\n");
-			System.out.print("\nje choisis: ");
+			one_by_one("Mauvais choix\n\n\n");
+			one_by_one("\nje choisis: \n");
 			str = sc.nextLine();
 		}
-		System.out.print("OK, et ton nom c'est ");
+		one_by_one("OK, et ton nom c'est ");
 		str = sc.nextLine();
-		System.out.println("Parfait, maintenant prépare toi a être transporté dans un monde inconnu, et c'est à TOI de choisir ton destin !");
+		one_by_one("Parfait, maintenant prépare toi a être transporté dans un monde inconnu, et c'est à TOI de choisir ton destin !\n");
 		Thread.sleep(5000);
 		for (int i = 0; i < 50; ++i) System.out.println();
-		System.out.print("ZzZzZzZzZz....");
+		one_by_one("ZzZzZzZzZz....");
 		Thread.sleep(1000);
-		System.out.print("zZzZ...zZ.z..");
+		one_by_one("zZzZ...zZ.z..");
 		Thread.sleep(1000);
-		System.out.println("AAAAAHH...");
+		one_by_one("AAAAAHH...\n");
 		Thread.sleep(1000);
-		System.out.println("Tu te réveille en sursaut de ton lit, tu as fait un cauchemar mais tu ne te souviens de rien...");
+		one_by_one("Tu te réveille en sursaut de ton lit, tu as fait un cauchemar mais tu ne te souviens de rien...\n");
 		Thread.sleep(1000);
-		System.out.println("Que fait tu ?\n");
-		System.out.println("-Je me rendors {1}");
-		System.out.println("-Je me lève {2}");
-		System.out.print("\nje choisis: ");
+		one_by_one("Que fait tu ?\n\n");
+		one_by_one("-Je me rendors {1}\n");
+		one_by_one("-Je me lève {2}\n");
+		one_by_one("\nje choisis: \n");
 		str = sc.nextLine();
 		for (a = 1; Integer.parseInt(str) == 1; a++) {
-			System.out.print("\nTu décides de te rendormir parce que le sommeil bah c'est cool\n\n");
-			System.out.print("Le lendemain tu te réveilles, que fais tu ?\n");
-			System.out.println("-Je me rendors {1}");
-			System.out.println("-Je me lève {2}");
-			System.out.print("\nje choisis: ");
+			one_by_one("\nTu décides de te rendormir parce que le sommeil bah c'est cool\n\n");
+			one_by_one("Le lendemain tu te réveilles, que fais tu ?\n");
+			one_by_one("-Je me rendors {1}\n");
+			one_by_one("-Je me lève {2}\n");
+			one_by_one("\nje choisis: ");
 			str = sc.nextLine();
 			while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
-				System.out.println("Mauvais choix\n\n");
-				System.out.print("\nje choisis: ");
+				one_by_one("Mauvais choix\n\n\n");
+				one_by_one("\nje choisis: ");
 				str = sc.nextLine();
 			}
 			if (a == 4) {
-				System.out.print("Lorsque tu te réveilles, ton village est en feu, les monstres l'ont");
-				System.out.println(" envahi car personne n'a pu les battre et tu meurs brulé...pfff la honte");
+				one_by_one("Lorsque tu te réveilles, ton village est en feu, les monstres l'ont");
+				one_by_one(" envahi car personne n'a pu les battre et tu meurs brulé...pfff la honte\n");
 				System.exit(0);
 			}
 		}
 		if (a == 1)
-			System.out.print("\nTu as bien dormis et te sens en forme");
+			one_by_one("\nTu as bien dormis et te sens en forme");
 		else {
-			System.out.print("\nTu as beaucoup dormis et tu sens en SUPER FORME **Force +1**");
-			stats.force += 1;
+			one_by_one("\nTu as beaucoup dormis et tu sens en SUPER FORME **Force +1**");
+			Stats.force += 1;
 		}
-		System.out.print("\n\nUne force se ressens à l'extérieur mais tu n'arrive pas à savoir de quoi il s'agit\n");
+		one_by_one("\n\nUne force se ressens à l'extérieur mais tu n'arrive pas à savoir de quoi il s'agit\n");
+		Thread.sleep(1000);
+	    one_by_one("Que fais tu ?\n");
+	    one_by_one("-Je sors dehors {1}\n");
+	    one_by_one("-Je vais manger un p'tit dej ! {2}\n");
+		str = sc.nextLine();
+		if (Integer.parseInt(str) == 2) {
+			fen.setContentPane(dej);
+		    fen.setVisible(true);
+			one_by_one("Tu prend ton croissant, ton chocolat chaud et tes céréales (sans lait evidemment) **Défense +1**\n");
+			Stats.defense += 1;
+		}
 		Thread.sleep(1000);
 		fen.setContentPane(com);
 	    fen.setVisible(true);
-		System.out.print("Que fais tu ?\n");
-		
 	}
 	
 	static void village() throws InterruptedException {
@@ -115,16 +119,24 @@ public class class1 extends JPanel {
 			}
 		}
 	}
+	static void one_by_one(String str) throws InterruptedException {
+		int i = 0;
+		int nb = 0;
+		
+		for (nb = 0; nb != str.length(); nb++);
+		for (i = 0; i != nb; i++) {
+			System.out.print(str.charAt(i));
+			Thread.sleep(90);
+		}
+	}
 }
-
-class stats {
+class Stats {
 	
 	static int force = 0;
 	static int intelligence = 0;
 	static int defense = 0;
 		
 }
-
 class weapon {
 	
 	static int force = 0;
@@ -188,13 +200,12 @@ class Combat extends JPanel {
 		  
 		  public void paintComponent(Graphics g){
 			  try {
-				  int re = 0;
 			      Image dec = ImageIO.read(new File("Image/plaine.png"));
 			      Image her = ImageIO.read(new File("Image/hero.png"));
 			      Image sli = ImageIO.read(new File("Image/slime.png"));
 			      Image slime = ImageIO.read(new File("Image/slime2.png"));
 			      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
-			      g.drawImage(her, 1100, 290, this);
+			      g.drawImage(her, 1100, 150, this);
 			      g.drawImage(sli, 550, 390, this);
 			    } catch (IOException e) {
 			      e.printStackTrace();
@@ -208,6 +219,26 @@ class Debut extends JPanel {
 		  try {
 		      Image dec = ImageIO.read(new File("Image/imagebkB.png"));
 		      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
+		    } catch (IOException e) {
+		      e.printStackTrace();
+	  }               
+	}
+}
+class Dej extends JPanel { 
+	private static final long serialVersionUID = 1L;
+	  
+	  public void paintComponent(Graphics g){
+		  try {
+		      Image dej = ImageIO.read(new File("Image/table.png"));
+		      Image blu = ImageIO.read(new File("Image/wood.png"));
+		      Image cer = ImageIO.read(new File("Image/cereal.png"));
+		      Image cho = ImageIO.read(new File("Image/chocolat.png"));
+		      Image cro = ImageIO.read(new File("Image/croissant.png"));
+		      g.drawImage(blu, 0, 0, this.getWidth(), this.getHeight(), this);
+		      g.drawImage(dej, 0, 0, this.getWidth(), this.getHeight()*2, this);
+		      g.drawImage(cer, 400, 50, 400, 400, this);
+		      g.drawImage(cho, 900, 200, 250, 250, this);
+		      g.drawImage(cro, 1300, 200, 250, 250, this);
 		    } catch (IOException e) {
 		      e.printStackTrace();
 	  }               
