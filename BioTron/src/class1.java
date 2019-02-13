@@ -24,6 +24,7 @@ public class class1 extends JPanel {
 		int a = 1;
 
 		Scanner sc = new Scanner(System.in);
+		village();
 		System.out.println("Salut toi,");
 		Thread.sleep(1000);
 		System.out.println("Ton aventure commence !!!");
@@ -90,13 +91,77 @@ public class class1 extends JPanel {
 		System.out.print("Que fais tu ?\n");
 		
 	}
+	
+	static void village() throws InterruptedException {
+		Scanner sc = new Scanner(System.in);
+		
+		for (int i = 0; i < 50; ++i) System.out.println();
+		System.out.print("Le calme reviens, les habitants te remercie et reprennent leur occupation respective...");
+		Thread.sleep(1000);
+		System.out.print("\n\nTu est dans le village, tu est libre, ");
+		Thread.sleep(1000);
+		System.out.print("tape help pour voir les commande possible");
+		Thread.sleep(1000);
+		while (true) {
+			System.out.print("\n->");
+			String str = sc.nextLine();
+			if (str.equals("help")) {
+				System.out.print("\n-> Tapez inv pour voir votre inventaire");
+				System.out.print("\n-> Tapez stat pour voir vos statistique");
+				System.out.print("\n-> Tapez statw pour voir les statistiques de votre arme");
+				System.out.print("\n-> Tapez quest pour voir continuer votre quête");
+				System.out.print("\n-> Tapez pnj pour voir parler aux personnes aux alentours");
+				System.out.print("\n-> Tapez market pour accéder au marché du village\n");
+			}
+		}
+	}
 }
+
 class stats {
 	
 	static int force = 0;
 	static int intelligence = 0;
 	static int defense = 0;
 		
+}
+
+class weapon {
+	
+	static int force = 0;
+	static int intelligence = 0;
+	static int defense = 0;
+		
+}
+
+class perso {
+	
+	String nom;
+	int sexe;
+	String weapon;
+	int vie;
+	int vie_max;
+	String statut;
+    int gold;
+    String spell[];
+    String inv[];
+    int tab_inv[];
+    int expe;
+    int level;
+    int exp_need;
+    int ame;
+	
+}
+
+class monster {
+	
+	String nom;
+    int vie;
+    String statut;
+    String loot;
+    int gold_to_give;
+    int exp_to_give;
+    int damage;
+	
 }
 
 class Fenetre extends JFrame {
