@@ -10,6 +10,12 @@ import java.io.IOException;
 public class class1 extends JPanel {
 	private static Combat com = new Combat();
 	private static Dej dej = new Dej();
+	private static Debut deb = new Debut();
+	private static Combat_end cbe = new Combat_end();
+	private static Boule bou = new Boule();
+	private static Heal hel = new Heal();
+	private static Combat_squ squ = new Combat_squ();
+	private static Combat_squ_end cse = new Combat_squ_end();
 	public static void main(String[] args) throws IOException, InterruptedException {
     	Fenetre fen = new Fenetre();
     	fen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,11 +40,16 @@ public class class1 extends JPanel {
 		String str = sc.nextLine();
 		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
 			one_by_one("Mauvais choix\n\n\n");
+			Thread.sleep(1000);
+			one_by_one("-Un Homme {1}\n");
+			Thread.sleep(1000);
+			one_by_one("-Une Femme {2}\n");
 			one_by_one("\nje choisis: \n");
 			str = sc.nextLine();
 		}
 		one_by_one("OK, et ton nom c'est ");
 		str = sc.nextLine();
+		perso.nom = str;
 		one_by_one("Parfait, maintenant prépare toi a être transporté dans un monde inconnu, et c'est à TOI de choisir ton destin !\n");
 		Thread.sleep(5000);
 		for (int i = 0; i < 50; ++i) System.out.println();
@@ -53,8 +64,15 @@ public class class1 extends JPanel {
 		one_by_one("Que fait tu ?\n\n");
 		one_by_one("-Je me rendors {1}\n");
 		one_by_one("-Je me lève {2}\n");
-		one_by_one("\nje choisis: \n");
+		one_by_one("\nje choisis: ");
 		str = sc.nextLine();
+		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
+			one_by_one("Mauvais choix\n\n\n");
+			one_by_one("-Je me rendors {1}\n");
+			one_by_one("-Je me lève {2}\n");
+			one_by_one("\nje choisis: ");
+			str = sc.nextLine();
+		}
 		for (a = 1; Integer.parseInt(str) == 1; a++) {
 			one_by_one("\nTu décides de te rendormir parce que le sommeil bah c'est cool\n\n");
 			one_by_one("Le lendemain tu te réveilles, que fais tu ?\n");
@@ -64,6 +82,8 @@ public class class1 extends JPanel {
 			str = sc.nextLine();
 			while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
 				one_by_one("Mauvais choix\n\n\n");
+				one_by_one("-Je me rendors {1}\n");
+				one_by_one("-Je me lève {2}\n");
 				one_by_one("\nje choisis: ");
 				str = sc.nextLine();
 			}
@@ -84,7 +104,15 @@ public class class1 extends JPanel {
 	    one_by_one("Que fais tu ?\n");
 	    one_by_one("-Je sors dehors {1}\n");
 	    one_by_one("-Je vais manger un p'tit dej ! {2}\n");
+	    one_by_one("\nje choisis: ");
 		str = sc.nextLine();
+		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
+			one_by_one("Mauvais choix\n\n\n");
+			one_by_one("-Je sors dehors {1}\n");
+		    one_by_one("-Je vais manger un p'tit dej ! {2}\n");
+			one_by_one("\nje choisis: ");
+			str = sc.nextLine();
+		}
 		if (Integer.parseInt(str) == 2) {
 			fen.setContentPane(dej);
 		    fen.setVisible(true);
@@ -92,11 +120,198 @@ public class class1 extends JPanel {
 			Stats.defense += 1;
 		}
 		Thread.sleep(1000);
+		one_by_one("\n\nC'est parti, oublie pas ton arme par contre !\nQue prend tu ?\n");
+		one_by_one("-Epée et bouclier de base {1}");
+		one_by_one("\n-Arc de base {2}");
+		one_by_one("\n-Livre de Sort basique {3}");
+		one_by_one("\nje choisis: ");
+		str = sc.nextLine();
+		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2 && Integer.parseInt(str) != 3) {
+			one_by_one("Mauvais choix\n\n\n");
+			one_by_one("-Epée et bouclier de base {1}");
+			one_by_one("\n-Arc de base {2}");
+			one_by_one("\n-Livre de Sort basique {3}");
+			one_by_one("\nje choisis: ");
+			str = sc.nextLine();
+		}
+		choix_arme(Integer.parseInt(str));
+		one_by_one("\n\nTu as pris ");
+		one_by_one(perso.weapon);
+		one_by_one("\nVous sortez et devant vous se trouve un slime\nVous ne comprenez pas ce qu'un slime fais dans le village\n");
 		fen.setContentPane(com);
 	    fen.setVisible(true);
+	    combat_slime(sc, str, fen);
+	    village(fen);
+	}
+	static void combat_slime(Scanner sc, String str, Fenetre fen) throws InterruptedException {
+		int i = 0;
+		int te = 0;
+		int sr = 0;
+		int save = 0;
+		one_by_one("\n*Le slime engage le combat*");
+		Thread.sleep(3000);
+		for (int e = 0; e < 50; ++e) System.out.println();
+		while (monster.vie > 0) {
+			Thread.sleep(1000);
+			if (i != 0)
+	            one_by_one("\n\n");
+	        i++;
+	        one_by_one("Le slime se prépare à attaquer, que fais tu ?");
+	        one_by_one("\n-Attaquer {1} *Force*");
+	        one_by_one("\n-Sort {2} *Intelligence*");
+	        one_by_one("\n-Objet {3}");
+	        one_by_one("\n-Fuir {4}");
+	        one_by_one("\nje choisis: ");
+	        str = sc.nextLine();
+	        while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2 && Integer.parseInt(str) != 3 && Integer.parseInt(str) != 4) {
+				one_by_one("Mauvais choix\n\n\n");
+				one_by_one("\n-Attaquer {1} *Force*");
+		        one_by_one("\n-Sort {2} *Intelligence*");
+		        one_by_one("\n-Objet {3}");
+		        one_by_one("\n-Fuir {4}");
+				one_by_one("\nje choisis: ");
+				str = sc.nextLine();
+			}
+	        sr = Integer.parseInt(str);
+	        if (sr == 1) {
+	        	one_by_one("Vous infligez ");
+	        	monster.vie -= (save = random_number((Stats.force + weapon.force) - 2, (Stats.force + weapon.force) + 2));
+	        	System.out.print(save);
+	        	one_by_one(" dégats au slime");
+	        }
+	        if (sr == 2 && (Stats.intelligence + weapon.intelligence) >= 5) {
+	        	te = spell_menu(str);
+	        	one_by_one("\nVous lancer le sort *|");
+	        	one_by_one(perso.spell[te]);
+	        	one_by_one(" |* !!!");
+	        	eval_spell(te, fen);
+	        	fen.setContentPane(com);
+	    	    fen.setVisible(true);
+	        }
+	        else if (sr == 2)
+	        	one_by_one("\nTu n'as pas assez d'intelligence pour manipuler la magie... Sale mortel.");
+	        if (sr == 3)
+	        	one_by_one("\nTu viens de commencer le jeu, tu crois avoir un truc dans ton inventaire ?");
+	        if (sr == 4) {
+	        	one_by_one("\nQuoi ? Fuir ? Au premier combat ? ");
+	        	Thread.sleep(1000);
+	        	one_by_one("\nMais tu es quel genre de lache pour fuir maintenant ?");
+	        	Thread.sleep(1000);
+	        	one_by_one("\nVas y, dit le si tu veux pas jouer hein");
+	        	Thread.sleep(1000);
+	        	one_by_one("\nNan mais c'est bon vas y pars...");
+	        	Thread.sleep(1000);
+	        	one_by_one("\nLe narrateur s'est enfuis, il n'y a personne pour raconter l'histoire, vous tombez dans l'oublie...");
+	        	Thread.sleep(1000);
+	        	one_by_one("  Adieu...\n");
+	        	Thread.sleep(1000);
+	        	System.exit(0);
+	        }
+	        if (monster.vie <= 0)
+	        	break;
+	        one_by_one("\nLe slime attaque !!");
+	        Thread.sleep(1000);
+	        one_by_one("\nIl vous inflige ");
+	        perso.vie = damage();
+	        one_by_one(" dégâts !!");
+	        if (perso.vie <= 0) {
+	        	Thread.sleep(1000);
+	        	one_by_one("\n\nDommage, vous etes mort, c'est la vie après tout...");
+	        	System.exit(0);
+	        }
+		}
+		one_by_one("\nBravo !\n");
+		Thread.sleep(1000);
+		one_by_one("Vous avez battue le slime !\nVous gagnez ");
+		perso.gold += monster.gold_to_give;
+		System.out.print(monster.gold_to_give);
+		one_by_one(" Golds, ");
+		System.out.print(monster.exp_to_give);
+		perso.exp += monster.exp_to_give;
+		one_by_one(" points d'expériences et 1 Âme");
+		perso.ame += 1;
+		fen.setContentPane(cbe);
+	    fen.setVisible(true);
+	    Thread.sleep(3000);
+	    fen.setContentPane(deb);
+	    fen.setVisible(true);
+	}
+	static void eval_spell(int i, Fenetre fen) throws InterruptedException {
+		int save = 0;
+
+		if (i == 0) {
+			fen.setContentPane(hel);
+		    fen.setVisible(true);
+			one_by_one("\nVous vous soignez de ");
+			System.out.print(save = random_number((((Stats.intelligence + weapon.intelligence) / 2) - 5), (Stats.intelligence + weapon.intelligence)));
+			one_by_one(" points de vie, vous avez ");
+			perso.vie += save;
+			if (perso.vie > perso.vie_max)
+				perso.vie = perso.vie_max;
+		one_by_one(" points de vie");
+		}
+		if (i == 1) {
+			one_by_one("\n\nVous vous concentrez et canalisez un boule de feu dans vos main...");
+			Thread.sleep(1000);
+			fen.setContentPane(bou);
+		    fen.setVisible(true);
+			one_by_one("\nVotre energie est puissante mais vous ne parvenez pas à la canaliser entièrement");
+			one_by_one("\nVous lancez votre boule de feu sur l'ennemi, il perd ");
+			System.out.print(save = random_number((Stats.intelligence + weapon.intelligence), (Stats.intelligence + weapon.intelligence) + ((Stats.intelligence + weapon.intelligence) / 2)));
+			monster.vie -= save;
+			one_by_one(" points de vie");
+		}
+	}
+	static int spell_menu(String str) throws InterruptedException {
+		Scanner sc = new Scanner(System.in);
+		one_by_one("\nListe de sort:\n-Heal {1}\n-Boule de feu mineure {2}");
+		str = sc.nextLine();
+		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
+			one_by_one("Mauvais choix");
+			Thread.sleep(1000);
+			one_by_one("\nListe de sort:\n-Heal {1}\n-Boule de feu mineure {2}\n\nJe choisis: ");
+			str = sc.nextLine();
+		}
+		return (Integer.parseInt(str) - 1);
+	}
+	static int damage() {
+		int save = 0;
+
+		save = ((Stats.defense + weapon.defense) - random_number(monster.damage, monster.damage * 2));
+		if (save < 0) {
+			perso.vie += save;
+			System.out.print(-(save));
+		}
+		else
+			System.out.print(0);
+		return (perso.vie);
+	}
+	static int random_number(int min, int max) {
+		return (int) (min + (Math.random() * (max - min)));
+		
+	}
+	static void choix_arme(int i) {
+		if (i == 1) {
+			perso.weapon = "Epée et bouclier de base";
+			weapon.force += 10;
+			weapon.intelligence += 3;
+			weapon.defense += 4;
+		}
+		if (i == 2) {
+			perso.weapon = "Arc de base";
+			weapon.force += 5;
+			weapon.intelligence += 4;
+			weapon.defense += 3;
+		}
+		if (i == 3) {
+			perso.weapon = "Livre de Sort basique";
+			weapon.force += 3;
+			weapon.intelligence += 10;
+			weapon.defense += 2;
+		}	
 	}
 	
-	static void village() throws InterruptedException {
+	static void village(Fenetre fen) throws InterruptedException {
 		Scanner sc = new Scanner(System.in);
 		int a = 0;
 		
@@ -155,7 +370,7 @@ public class class1 extends JPanel {
 				Thread.sleep(1000);
 		        System.out.print("\nBonjour ");
 		        System.out.print(perso.nom);
-		        System.out.print("Je suis Meunier, le meunier du village, et j'ai entendu une rumeur comme quoi un dragon était dans les parages !!");
+		        System.out.print(",\nJe suis Meunier, le meunier du village, et j'ai entendu une rumeur comme quoi un dragon était dans les parages !!");
 		        System.out.print("\nOccupez vous de lui et je vous offrirais une récompense !");
 		        a = 1;
 			}
@@ -167,23 +382,11 @@ public class class1 extends JPanel {
 				for (int i = 0; i < 50; ++i) System.out.println();
 				System.out.print("C'est parti, vous prenez votre courage à deux mains et partez détruire ce dragon !");
 				Thread.sleep(1000);
-				quest();
+				quest(fen);
 			}
 		}
 	}
-	
-	static void one_by_one(String str) throws InterruptedException {
-		int i = 0;
-		int nb = 0;
-		
-		for (nb = 0; nb != str.length(); nb++);
-		for (i = 0; i != nb; i++) {
-			System.out.print(str.charAt(i));
-			Thread.sleep(90);
-		}
-	}
-	
-	static void quest() throws InterruptedException {
+	static void quest(Fenetre fen) throws InterruptedException {
 		Scanner sc = new Scanner(System.in);
 		
 		one_by_one("\n\nVous vous retrouvez à une intersection, à droite ce trouve un long chemin contournant la forêt");
@@ -201,10 +404,10 @@ public class class1 extends JPanel {
 			str = sc.nextLine();
 		}
 	    if (Integer.parseInt(str) == 1) {
-	    	chemin_long();
+	    	chemin_long(fen);
 	    }
 	    if (Integer.parseInt(str) == 2) {
-	    	chemin_court();
+	    	chemin_court(fen);
 	    }
 	    if (Integer.parseInt(str) == 3) {
 	    	one_by_one("\nTu ne te sens pas prêt à affronté le dragon, tu rebrousses chemin...");
@@ -213,13 +416,7 @@ public class class1 extends JPanel {
 	    	return;
 	    }
 	}
-	
-	static void chemin_court() throws InterruptedException {
-		one_by_one("En traversant la fôret, tu trébuche et tu tombes sur des ronces. **PV -2**\n");
-		dragon();
-	}
-	
-	static void chemin_long() throws InterruptedException {
+	static void chemin_long(Fenetre fen) throws InterruptedException {
 		Scanner sc = new Scanner(System.in);
 		
 		one_by_one("\nTu choisis de contourner la fôret pour retrouver le dragon.\n");
@@ -236,7 +433,11 @@ public class class1 extends JPanel {
 		Thread.sleep(1000);
 		one_by_one("L'escalier étant derrière le squelette, la seule option est de se battre avec lui !\n");
 		Thread.sleep(1000);
-		//combat squelette
+		fen.setContentPane(com);
+	    fen.setVisible(true);
+		combat_squelette(fen);
+		fen.setContentPane(cse);
+	    fen.setVisible(true);
 		one_by_one("Une fois le squelette battu, tu as à peine le temps de récupérer ton souffle, que t'entends d'autres coups et bruits venant des autres chambres.\n");
 		Thread.sleep(1000);
 		one_by_one("une fois en bas des escaliers tu vois que des squelettes venu du bâtiment d'en face essayent de casser la porte principale.\n");
@@ -256,7 +457,7 @@ public class class1 extends JPanel {
 			str = sc.nextLine();
 		}
 		if (Integer.parseInt(str) == 1) {
-			one_by_one("\nTu te réveilles le lendemain, prêt à partir te combattre ! **Force +1**\n");
+			one_by_one("Tu te réveilles le lendemain, prêt à partir combattre ! **Force +1**");
 			Stats.force += 1;
 		}
 		if (Integer.parseInt(str) == 2) {
@@ -267,24 +468,213 @@ public class class1 extends JPanel {
 				System.exit(0);
 			}
 		}
-		dragon();
+		dragon(fen);
     }
-	
-	static void dragon() throws InterruptedException {
+	static void chemin_court(Fenetre fen) throws InterruptedException {
+		one_by_one("En traversant la fôret, tu trébuche et tu tombes sur des ronces. **PV -2**\n");
+		dragon(fen);
+	}
+	static void dragon(Fenetre fen) throws InterruptedException {
 		one_by_one("Après une montée intense sur la montagne la plus haute de toutes les terres connu, tu arrive enfin au sommet.\n");
 		one_by_one("Tu monte sur un plateau avec quelques rochers. Après avoir avancé quelques pas, tu entends un grand soufle.\n");
 		one_by_one("Tu ne bouge plus pendant quelques secondes, espérant que le dragon ne t'ai pas vu. Et la tu te rend compte qu'il dort.\n");
 		one_by_one("Tu te raproche en fesant attention où tu poses tes pieds. Une fois près du dragon, tu récupère une épée tellement grande, que tu peine à la manier à 2 mains et tu plantes cet épée dans une de ses ailes.\n");
 		one_by_one("Le dragon se réveil en hurlant, et essaye de décoller mais ne peut pas car l'épée est resté planté dans une de ses ailes\n");
 		one_by_one("Le dragon se retourne alors et crache du feu. Tu réussis juste à temps de te cacher derrière un rocher.\n");
-		//combat dragon
+		combat_dragon(fen);
 		one_by_one("Tu as réussis à battre le dragon ! Tu prend le trésor gardé par le trésor et tu repart dans le village.\n");
 		one_by_one("Vous retournez voir Meunier. Voici votre récompense ! Une brindille !\n");
 		perso.inv[0] = "brindille";
 		one_by_one("\n\n\nMerci d'avoir joué à notre pre-alpha !");
 	}
+	static void combat_squelette(Fenetre fen) throws InterruptedException {
+		int i = 0;
+		int te = 0;
+		int sr = 0;
+		int save = 0;
+		Scanner sc = new Scanner(System.in);
+		String str;
+		monster.vie = 25;
+		fen.setContentPane(squ);
+	    fen.setVisible(true);
+		one_by_one("\n*Le squelette engage le combat*");
+		Thread.sleep(3000);
+		for (int e = 0; e < 50; ++e) System.out.println();
+		while (monster.vie > 0) {
+			Thread.sleep(1000);
+			if (i != 0)
+	            one_by_one("\n\n");
+	        i++;
+	        one_by_one("Le squelette se prépare à attaquer, que fais tu ?");
+	        one_by_one("\n-Attaquer {1} *Force*");
+	        one_by_one("\n-Sort {2} *Intelligence*");
+	        one_by_one("\n-Objet {3}");
+	        one_by_one("\n-Fuir {4}");
+	        one_by_one("\nje choisis: ");
+	        str = sc.nextLine();
+	        while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2 && Integer.parseInt(str) != 3 && Integer.parseInt(str) != 4) {
+				one_by_one("Mauvais choix\n\n\n");
+				one_by_one("\n-Attaquer {1} *Force*");
+		        one_by_one("\n-Sort {2} *Intelligence*");
+		        one_by_one("\n-Objet {3}");
+		        one_by_one("\n-Fuir {4}");
+				one_by_one("\nje choisis: ");
+				str = sc.nextLine();
+			}
+	        sr = Integer.parseInt(str);
+	        if (sr == 1) {
+	        	one_by_one("Vous infligez ");
+	        	monster.vie -= (save = random_number((Stats.force + weapon.force) - 2, (Stats.force + weapon.force) + 2));
+	        	System.out.print(save);
+	        	one_by_one(" dégats au squelette");
+	        }
+	        if (sr == 2 && (Stats.intelligence + weapon.intelligence) >= 5) {
+	        	te = spell_menu(str);
+	        	one_by_one("\nVous lancer le sort *|");
+	        	one_by_one(perso.spell[te]);
+	        	one_by_one(" |* !!!");
+	        	eval_spell(te, fen);
+	        }
+	        else if (sr == 2)
+	        	one_by_one("\nTu n'as pas assez d'intelligence pour manipuler la magie... Sale mortel.");
+	        if (sr == 3)
+	        	one_by_one("\nLes Objets ne sont pas encore disponible");
+	        if (sr == 4) {
+	        	one_by_one("\nQuoi ? Fuir ? Tu peux pas faire tout les combats comme dans un jeu normal ?");
+	        }
+	        if (monster.vie <= 0)
+	        	break;
+	        one_by_one("\nLe squelette attaque !!");
+	        Thread.sleep(1000);
+	        one_by_one("\nIl vous inflige ");
+	        perso.vie = damage();
+	        one_by_one(" dégâts !!");
+	        if (perso.vie <= 0) {
+	        	Thread.sleep(1000);
+	        	one_by_one("\n\nDommage, vous etes mort, c'est la vie après tout...");
+	        	System.exit(0);
+	        }
+		}
+		one_by_one("\nBravo !\n");
+		Thread.sleep(1000);
+		fen.setContentPane(cse);
+	    fen.setVisible(true);
+		one_by_one("Vous avez battue le squelette !\nVous gagnez ");
+		perso.gold += monster.gold_to_give;
+		System.out.print(monster.gold_to_give);
+		one_by_one(" Golds, ");
+		System.out.print(monster.exp_to_give);
+		perso.exp += monster.exp_to_give;
+		one_by_one(" points d'expériences et 1 Âme");
+		perso.ame += 1;
+		if (perso.exp >= perso.exp_need) {
+			one_by_one("\nOh, vous passer au niveau 2 !!!");
+			one_by_one("\nToute vos statistiques augmentent de 2 points !");
+			one_by_one("\n**Defense +2** **Force +2** **Intelligence +2**");
+			Stats.defense += 2;
+			Stats.intelligence += 2;
+			Stats.defense += 2;
+		}
+		fen.setContentPane(deb);
+	    fen.setVisible(true);
+		/*fen.setContentPane(cbe);
+	    fen.setVisible(true);
+	    Thread.sleep(3000);
+	    fen.setContentPane(deb);
+	    fen.setVisible(true);*/
+	}
+	static void one_by_one(String str) throws InterruptedException {
+		int i = 0;
+		int nb = 0;
+		
+		for (nb = 0; nb != str.length(); nb++);
+		for (i = 0; i != nb; i++) {
+			System.out.print(str.charAt(i));
+			Thread.sleep(70);
+		}
+	}
+	static void combat_dragon(Fenetre fen) throws InterruptedException {
+		int i = 0;
+		int te = 0;
+		int sr = 0;
+		int save = 0;
+		Scanner sc = new Scanner(System.in);
+		String str;
+		monster.vie = 40;
+		one_by_one("\n*Le Dragon engage le combat*");
+		Thread.sleep(3000);
+		for (int e = 0; e < 50; ++e) System.out.println();
+		while (monster.vie > 0) {
+			Thread.sleep(1000);
+			if (i != 0)
+	            one_by_one("\n\n");
+	        i++;
+	        one_by_one("Le Dragon se prépare à attaquer, que fais tu ?");
+	        one_by_one("\n-Attaquer {1} *Force*");
+	        one_by_one("\n-Sort {2} *Intelligence*");
+	        one_by_one("\n-Objet {3}");
+	        one_by_one("\n-Fuir {4}");
+	        one_by_one("\nje choisis: ");
+	        str = sc.nextLine();
+	        while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2 && Integer.parseInt(str) != 3 && Integer.parseInt(str) != 4) {
+				one_by_one("Mauvais choix\n\n\n");
+				one_by_one("\n-Attaquer {1} *Force*");
+		        one_by_one("\n-Sort {2} *Intelligence*");
+		        one_by_one("\n-Objet {3}");
+		        one_by_one("\n-Fuir {4}");
+				one_by_one("\nje choisis: ");
+				str = sc.nextLine();
+			}
+	        sr = Integer.parseInt(str);
+	        if (sr == 1) {
+	        	one_by_one("Vous infligez ");
+	        	monster.vie -= (save = random_number((Stats.force + weapon.force) - 2, (Stats.force + weapon.force) + 2));
+	        	System.out.print(save);
+	        	one_by_one(" dégats au Dragon");
+	        }
+	        if (sr == 2 && (Stats.intelligence + weapon.intelligence) >= 5) {
+	        	te = spell_menu(str);
+	        	one_by_one("\nVous lancer le sort *|");
+	        	one_by_one(perso.spell[te]);
+	        	one_by_one(" |* !!!");
+	        	eval_spell(te, fen);
+	        }
+	        else if (sr == 2)
+	        	one_by_one("\nTu n'as pas assez d'intelligence pour manipuler la magie... Sale mortel.");
+	        if (sr == 3)
+	        	one_by_one("\nLes Objets ne sont pas encore disponible");
+	        if (sr == 4)
+	        	one_by_one("\nQuoi ? Fuir ? C'est le boss final, ne fuis pas stp ^^'");
+	        if (monster.vie <= 0)
+	        	break;
+	        one_by_one("\nLe Dragon attaque !!");
+	        Thread.sleep(1000);
+	        one_by_one("\nIl vous inflige ");
+	        perso.vie = damage();
+	        one_by_one(" dégâts !!");
+	        if (perso.vie <= 0) {
+	        	Thread.sleep(1000);
+	        	one_by_one("\n\nDommage, vous etes mort, c'est la vie après tout...");
+	        	System.exit(0);
+	        }
+		}
+		one_by_one("\nBravo !\n");
+		Thread.sleep(1000);
+		one_by_one("Vous avez battue le squelette !\nVous gagnez ");
+		perso.gold += monster.gold_to_give;
+		System.out.print(monster.gold_to_give);
+		one_by_one(" Golds, ");
+		System.out.print(monster.exp_to_give);
+		perso.exp += monster.exp_to_give;
+		one_by_one(" points d'expériences et 1 Âme");
+		perso.ame += 1;
+		/*fen.setContentPane(cbe);
+	    fen.setVisible(true);
+	    Thread.sleep(3000);
+	    fen.setContentPane(deb);
+	    fen.setVisible(true);*/
+	}
 }
-
 class Stats {
 	
 	static int force = 0;
@@ -303,31 +693,31 @@ class weapon {
 class perso {
 	
 	static String nom;
-	static int sexe;
+	int sexe;
 	static String weapon;
-	static int vie;
-	static int vie_max;
-	static String statut;
-	static int gold;
-	static String spell[];
-	static String inv[];
-	static int tab_inv[];
-	static int expe;
-	static int level;
-	static int exp_need;
-	static int ame;
+	static int vie = 20;
+	static int vie_max = 20;
+	String statut;
+    static int gold = 0;
+    static String spell[] = {"Heal", "Boule de feu mineure", null, null, null};
+    static String inv[] = {null, null, null};
+    static int tab_inv[];
+    static int exp = 0;
+    int level = 1;
+    static int exp_need = 10;
+    static int ame = 0;
 	
 }
 
 class monster {
 	
 	String nom;
-    int vie;
+    static int vie = 15;
     String statut;
     String loot;
-    int gold_to_give;
-    int exp_to_give;
-    int damage;
+    static int gold_to_give = 5;
+    static int exp_to_give = 10;
+    static int damage = 5;
 	
 }
 
@@ -367,6 +757,58 @@ class Combat extends JPanel {
 		  }               
 		}
 	}
+class Combat_end extends JPanel { 
+	private static final long serialVersionUID = 1L;
+	  
+	  public void paintComponent(Graphics g){
+		  try {
+		      Image dec = ImageIO.read(new File("Image/plaine.png"));
+		      Image her = ImageIO.read(new File("Image/hero.png"));
+		      Image sli = ImageIO.read(new File("Image/fume.png"));
+		      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
+		      g.drawImage(her, 1100, 150, this);
+		      g.drawImage(sli, 550, 390, this);
+		    } catch (IOException e) {
+		      e.printStackTrace();
+	  }               
+	}
+}
+class Boule extends JPanel { 
+	private static final long serialVersionUID = 1L;
+	  
+	  public void paintComponent(Graphics g){
+		  try {
+			  Image dec = ImageIO.read(new File("Image/plaine.png"));
+		      Image her = ImageIO.read(new File("Image/antoine_graphiste.png"));
+		      Image sli = ImageIO.read(new File("Image/slime.png"));
+		      Image bou = ImageIO.read(new File("Image/boule.png"));
+		      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
+		      g.drawImage(her, 1100, 150, this);
+		      g.drawImage(sli, 550, 390, this);
+		      g.drawImage(bou, 790, 320, this);
+		    } catch (IOException e) {
+		      e.printStackTrace();
+	  }               
+	}
+}
+class Heal extends JPanel { 
+	private static final long serialVersionUID = 1L;
+	  
+	  public void paintComponent(Graphics g){
+		  try {
+			  Image dec = ImageIO.read(new File("Image/plaine.png"));
+		      Image her = ImageIO.read(new File("Image/antoine_graphiste.png"));
+		      Image sli = ImageIO.read(new File("Image/slime.png"));
+		      Image hel = ImageIO.read(new File("Image/heal.png"));
+		      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
+		      g.drawImage(her, 1100, 150, this);
+		      g.drawImage(sli, 550, 390, this);
+		      g.drawImage(hel, 1200, 200, this);
+		    } catch (IOException e) {
+		      e.printStackTrace();
+	  }               
+	}
+}
 class Debut extends JPanel { 
 	private static final long serialVersionUID = 1L;
 	  
@@ -394,6 +836,54 @@ class Dej extends JPanel {
 		      g.drawImage(cer, 400, 50, 400, 400, this);
 		      g.drawImage(cho, 900, 200, 250, 250, this);
 		      g.drawImage(cro, 1300, 200, 250, 250, this);
+		    } catch (IOException e) {
+		      e.printStackTrace();
+	  }               
+	}
+}
+class Combat_squ extends JPanel { 
+	private static final long serialVersionUID = 1L;
+	  
+	  public void paintComponent(Graphics g){
+		  try {
+		      Image dec = ImageIO.read(new File("Image/Image useless/decor.png"));
+		      Image her = ImageIO.read(new File("Image/hero.png"));
+		      Image sli = ImageIO.read(new File("Image/squelette.png"));
+		      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
+		      g.drawImage(her, 1100, 343, 150, 200, this);
+		      g.drawImage(sli, 600, 380, 150, 150, this);
+		    } catch (IOException e) {
+		      e.printStackTrace();
+	  }               
+	}
+}
+class Combat_squ_boule extends JPanel { 
+	private static final long serialVersionUID = 1L;
+	  
+	  public void paintComponent(Graphics g){
+		  try {
+		      Image dec = ImageIO.read(new File("Image/Image useless/decor.png"));
+		      Image her = ImageIO.read(new File("Image/hero.png"));
+		      Image sli = ImageIO.read(new File("Image/squelette.png"));
+		      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
+		      g.drawImage(her, 1100, 343, 150, 200, this);
+		      g.drawImage(sli, 600, 380, 150, 150, this);
+		    } catch (IOException e) {
+		      e.printStackTrace();
+	  }               
+	}
+}
+class Combat_squ_end extends JPanel { 
+	private static final long serialVersionUID = 1L;
+	  
+	  public void paintComponent(Graphics g){
+		  try {
+			  Image dec = ImageIO.read(new File("Image/Image useless/decor.png"));
+		      Image her = ImageIO.read(new File("Image/hero.png"));
+		      Image sli = ImageIO.read(new File("Image/fume.png"));
+		      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
+		      g.drawImage(her, 1100, 343, 150, 200, this);
+		      g.drawImage(sli, 600, 380, 150, 150, this);
 		    } catch (IOException e) {
 		      e.printStackTrace();
 	  }               
