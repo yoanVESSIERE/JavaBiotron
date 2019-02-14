@@ -204,7 +204,7 @@ public class class1 extends JPanel {
 	    	chemin_long();
 	    }
 	    if (Integer.parseInt(str) == 2) {
-	    	
+	    	chemin_court();
 	    }
 	    if (Integer.parseInt(str) == 3) {
 	    	one_by_one("\nTu ne te sens pas prêt à affronté le dragon, tu rebrousses chemin...");
@@ -213,6 +213,12 @@ public class class1 extends JPanel {
 	    	return;
 	    }
 	}
+	
+	static void chemin_court() throws InterruptedException {
+		one_by_one("En traversant la fôret, tu trébuche et tu tombes sur des ronces. **PV -2**\n");
+		dragon();
+	}
+	
 	static void chemin_long() throws InterruptedException {
 		Scanner sc = new Scanner(System.in);
 		
@@ -250,11 +256,35 @@ public class class1 extends JPanel {
 			str = sc.nextLine();
 		}
 		if (Integer.parseInt(str) == 1) {
-			one_by_one("Tu te réveilles le lendemain, prêt à partir combattre ! **Force +1**");
+			one_by_one("\nTu te réveilles le lendemain, prêt à partir te combattre ! **Force +1**\n");
 			Stats.force += 1;
 		}
+		if (Integer.parseInt(str) == 2) {
+			one_by_one("\nEn marchant la nuit, tu trébuche sur un caillou et tu te fais mal. **PV -2**\n");
+			perso.vie -= 2;
+			if (perso.vie <= 0) {
+				one_by_one("Quel domage, une histoire tellement prometeuse se fini de façon tellement décenvante !\n");
+				System.exit(0);
+			}
+		}
+		dragon();
     }
+	
+	static void dragon() throws InterruptedException {
+		one_by_one("Après une montée intense sur la montagne la plus haute de toutes les terres connu, tu arrive enfin au sommet.\n");
+		one_by_one("Tu monte sur un plateau avec quelques rochers. Après avoir avancé quelques pas, tu entends un grand soufle.\n");
+		one_by_one("Tu ne bouge plus pendant quelques secondes, espérant que le dragon ne t'ai pas vu. Et la tu te rend compte qu'il dort.\n");
+		one_by_one("Tu te raproche en fesant attention où tu poses tes pieds. Une fois près du dragon, tu récupère une épée tellement grande, que tu peine à la manier à 2 mains et tu plantes cet épée dans une de ses ailes.\n");
+		one_by_one("Le dragon se réveil en hurlant, et essaye de décoller mais ne peut pas car l'épée est resté planté dans une de ses ailes\n");
+		one_by_one("Le dragon se retourne alors et crache du feu. Tu réussis juste à temps de te cacher derrière un rocher.\n");
+		//combat dragon
+		one_by_one("Tu as réussis à battre le dragon ! Tu prend le trésor gardé par le trésor et tu repart dans le village.\n");
+		one_by_one("Vous retournez voir Meunier. Voici votre récompense ! Une brindille !\n");
+		perso.inv[0] = "brindille";
+		one_by_one("\n\n\nMerci d'avoir joué à notre pre-alpha !");
+	}
 }
+
 class Stats {
 	
 	static int force = 0;
