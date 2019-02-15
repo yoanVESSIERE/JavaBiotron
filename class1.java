@@ -286,6 +286,9 @@ public class class1 extends JPanel {
 	        	sc.nextLine();
 	        	System.exit(0);
 	        }
+	        one_by_one("\nIl vous reste ");
+	        System.out.print(perso.vie);
+	        one_by_one(" points de vie");
 		}
 		one_by_one("\nBravo !\n");
 		Thread.sleep(1000);
@@ -488,11 +491,11 @@ public class class1 extends JPanel {
 	        wp.play();
 			if (str.equals("help")) {
 				System.out.print("\n-> Tapez inv pour voir votre inventaire");
-				System.out.print("\n-> Tapez stat pour voir vos statistique");
+				System.out.print("\n-> Tapez stat pour voir vos statistiques");
 				System.out.print("\n-> Tapez statw pour voir les statistiques de votre arme");
-				System.out.print("\n-> Tapez quest pour voir continuer votre quête");
+				System.out.print("\n-> Tapez quest pour continuer votre quête");
 				System.out.print("\n-> Tapez pnj pour voir parler aux personnes aux alentours");
-				System.out.print("\n-> Tapez market pour accéder au marché du village\n");
+				System.out.print("\n-> Tapez market pour accéder au magasin du village\n");
 			}
 			if (str.equals("inv")) {
 				System.out.print("\n\nVous disposez de ");
@@ -517,6 +520,10 @@ public class class1 extends JPanel {
 				System.out.print(Stats.intelligence);
 				System.out.print("\nDéfense de votre personnage: ");
 				System.out.print(Stats.defense);
+				System.out.print("\nPoints de vie maximum de votre personnage: ");
+				System.out.print(perso.vie_max);
+				System.out.print("\nPoints de vie actuel de votre personnage: ");
+				System.out.print(perso.vie);
 			}
 			if (str.equals("statw")) {
 				System.out.print("\n\nForce de votre arme: ");
@@ -806,6 +813,9 @@ public class class1 extends JPanel {
 	        	sc.nextLine();
 	        	System.exit(0);
 	        }
+	        one_by_one("\nIl vous reste ");
+	        System.out.print(perso.vie);
+	        one_by_one(" points de vie");
 		}
 		one_by_one("\nBravo !\n");
 		Thread.sleep(1000);
@@ -949,6 +959,9 @@ public class class1 extends JPanel {
 	        	sc.nextLine();
 	        	System.exit(0);
 	        }
+	        one_by_one("\nIl vous reste ");
+	        System.out.print(perso.vie);
+	        one_by_one(" points de vie");
 		}
 		one_by_one("\nBravo !\n");
 		Thread.sleep(1000);
@@ -1129,7 +1142,7 @@ class Debut extends JPanel {
 		      g.drawImage(dec, 0, 0, this.getWidth(), this.getHeight(), this);
 		      g.setFont(font);
 		      g.setColor(Color.white); 
-		      g.drawString("Développer par: Michael FABRIE et Yoan VESSIERE Tek 1 EPITECH", 10, 670);
+		      g.drawString("Développé par: Michael FABRIE et Yoan VESSIERE Tek 1 EPITECH", 10, 670);
 		    } catch (IOException e) {
 		      e.printStackTrace();
 	  }               
@@ -1148,7 +1161,7 @@ class Dej extends JPanel {
 		      g.drawImage(blu, 0, 0, this.getWidth(), this.getHeight(), this);
 		      g.drawImage(dej, 0, 0, this.getWidth(), this.getHeight()*2, this);
 		      g.drawImage(cer, 400, 50, 400, 400, this);
-		      g.drawImage(cho, 900, 200, 250, 250, this);
+		      g.drawImage(cho, 900, 160, 250, 250, this);
 		      g.drawImage(cro, 1300, 200, 250, 250, this);
 		    } catch (IOException e) {
 		      e.printStackTrace();
