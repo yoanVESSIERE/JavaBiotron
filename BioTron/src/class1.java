@@ -2,10 +2,18 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class class1 extends JPanel {
 	private static Combat com = new Combat();
@@ -16,13 +24,21 @@ public class class1 extends JPanel {
 	private static Heal hel = new Heal();
 	private static Combat_squ squ = new Combat_squ();
 	private static Combat_squ_end cse = new Combat_squ_end();
-	public static void main(String[] args) throws IOException, InterruptedException {
+	
+	public static void main(String[] args) throws Exception {
     	Fenetre fen = new Fenetre();
     	fen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    aventure(fen);
+    	musique2 mus = new musique2(new File("musique/Ambiance song/intro.wav")); 
+    	 try {
+             mus.open();
+             mus.play_boucle();
+         } catch (Exception e) { 
+             e.printStackTrace();
+         } 
+	    aventure(fen, mus);
 	}
 	
-	static void aventure(Fenetre fen) throws InterruptedException {
+	static void aventure(Fenetre fen, musique2 mus) throws Exception {
 		int a = 1;
 
 		Scanner sc = new Scanner(System.in);
@@ -38,6 +54,9 @@ public class class1 extends JPanel {
 		Thread.sleep(1000);
 		one_by_one("\nje choisis: ");
 		String str = sc.nextLine();
+		musique wp = new musique(new File("musique/Bits.wav"));
+        wp.open();
+        wp.play();
 		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
 			one_by_one("Mauvais choix\n\n\n");
 			Thread.sleep(1000);
@@ -46,9 +65,15 @@ public class class1 extends JPanel {
 			one_by_one("-Une Femme {2}\n");
 			one_by_one("\nje choisis: \n");
 			str = sc.nextLine();
+			wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();
+	        wp.play();
 		}
 		one_by_one("OK, et ton nom c'est ");
 		str = sc.nextLine();
+		wp = new musique(new File("musique/Bits.wav"));
+        wp.open();
+        wp.play();
 		perso.nom = str;
 		one_by_one("Parfait, maintenant prépare toi a être transporté dans un monde inconnu, et c'est à TOI de choisir ton destin !\n");
 		Thread.sleep(5000);
@@ -66,12 +91,18 @@ public class class1 extends JPanel {
 		one_by_one("-Je me lève {2}\n");
 		one_by_one("\nje choisis: ");
 		str = sc.nextLine();
+		wp = new musique(new File("musique/Bits.wav"));
+        wp.open();
+        wp.play();
 		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
 			one_by_one("Mauvais choix\n\n\n");
 			one_by_one("-Je me rendors {1}\n");
 			one_by_one("-Je me lève {2}\n");
 			one_by_one("\nje choisis: ");
 			str = sc.nextLine();
+			wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();
+	        wp.play();
 		}
 		for (a = 1; Integer.parseInt(str) == 1; a++) {
 			one_by_one("\nTu décides de te rendormir parce que le sommeil bah c'est cool\n\n");
@@ -80,12 +111,18 @@ public class class1 extends JPanel {
 			one_by_one("-Je me lève {2}\n");
 			one_by_one("\nje choisis: ");
 			str = sc.nextLine();
+			wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();
+	        wp.play();
 			while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
 				one_by_one("Mauvais choix\n\n\n");
 				one_by_one("-Je me rendors {1}\n");
 				one_by_one("-Je me lève {2}\n");
 				one_by_one("\nje choisis: ");
 				str = sc.nextLine();
+				wp = new musique(new File("musique/Bits.wav"));
+		        wp.open();
+		        wp.play();
 			}
 			if (a == 4) {
 				one_by_one("Lorsque tu te réveilles, ton village est en feu, les monstres l'ont");
@@ -106,12 +143,18 @@ public class class1 extends JPanel {
 	    one_by_one("-Je vais manger un p'tit dej ! {2}\n");
 	    one_by_one("\nje choisis: ");
 		str = sc.nextLine();
+		wp = new musique(new File("musique/Bits.wav"));
+        wp.open();
+        wp.play();
 		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
 			one_by_one("Mauvais choix\n\n\n");
 			one_by_one("-Je sors dehors {1}\n");
 		    one_by_one("-Je vais manger un p'tit dej ! {2}\n");
 			one_by_one("\nje choisis: ");
 			str = sc.nextLine();
+			wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();
+	        wp.play();
 		}
 		if (Integer.parseInt(str) == 2) {
 			fen.setContentPane(dej);
@@ -126,6 +169,9 @@ public class class1 extends JPanel {
 		one_by_one("\n-Livre de Sort basique {3}");
 		one_by_one("\nje choisis: ");
 		str = sc.nextLine();
+		wp = new musique(new File("musique/Bits.wav"));
+        wp.open();
+        wp.play();
 		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2 && Integer.parseInt(str) != 3) {
 			one_by_one("Mauvais choix\n\n\n");
 			one_by_one("-Epée et bouclier de base {1}");
@@ -133,6 +179,9 @@ public class class1 extends JPanel {
 			one_by_one("\n-Livre de Sort basique {3}");
 			one_by_one("\nje choisis: ");
 			str = sc.nextLine();
+			wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();
+	        wp.play();
 		}
 		choix_arme(Integer.parseInt(str));
 		one_by_one("\n\nTu as pris ");
@@ -140,14 +189,18 @@ public class class1 extends JPanel {
 		one_by_one("\nVous sortez et devant vous se trouve un slime\nVous ne comprenez pas ce qu'un slime fais dans le village\n");
 		fen.setContentPane(com);
 	    fen.setVisible(true);
-	    combat_slime(sc, str, fen);
-	    village(fen);
+	    combat_slime(sc, str, fen, wp, mus);
+	    village(fen, wp, mus);
 	}
-	static void combat_slime(Scanner sc, String str, Fenetre fen) throws InterruptedException {
+	static void combat_slime(Scanner sc, String str, Fenetre fen, musique wp, musique2 mus) throws Exception {
 		int i = 0;
 		int te = 0;
 		int sr = 0;
 		int save = 0;
+		mus.close();
+		mus = new musique2(new File("musique/Battle song/battle.wav"));
+        mus.open();
+        mus.play_boucle();
 		one_by_one("\n*Le slime engage le combat*");
 		Thread.sleep(3000);
 		for (int e = 0; e < 50; ++e) System.out.println();
@@ -163,6 +216,11 @@ public class class1 extends JPanel {
 	        one_by_one("\n-Fuir {4}");
 	        one_by_one("\nje choisis: ");
 	        str = sc.nextLine();
+	        wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();//ouverture du flux 
+	        wp.play();//lecture 
+	        //wp.stop();//arret 
+	        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 	        while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2 && Integer.parseInt(str) != 3 && Integer.parseInt(str) != 4) {
 				one_by_one("Mauvais choix\n\n\n");
 				one_by_one("\n-Attaquer {1} *Force*");
@@ -171,6 +229,11 @@ public class class1 extends JPanel {
 		        one_by_one("\n-Fuir {4}");
 				one_by_one("\nje choisis: ");
 				str = sc.nextLine();
+				wp = new musique(new File("musique/Bits.wav"));
+		        wp.open();//ouverture du flux 
+		        wp.play();//lecture 
+		        //wp.stop();//arret 
+		        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 			}
 	        sr = Integer.parseInt(str);
 	        if (sr == 1) {
@@ -180,7 +243,7 @@ public class class1 extends JPanel {
 	        	one_by_one(" dégats au slime");
 	        }
 	        if (sr == 2 && (Stats.intelligence + weapon.intelligence) >= 5) {
-	        	te = spell_menu(str);
+	        	te = spell_menu(str, wp);
 	        	one_by_one("\nVous lancer le sort *|");
 	        	one_by_one(perso.spell[te]);
 	        	one_by_one(" |* !!!");
@@ -262,15 +325,25 @@ public class class1 extends JPanel {
 			one_by_one(" points de vie");
 		}
 	}
-	static int spell_menu(String str) throws InterruptedException {
+	static int spell_menu(String str, musique wp) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		one_by_one("\nListe de sort:\n-Heal {1}\n-Boule de feu mineure {2}");
 		str = sc.nextLine();
+		wp = new musique(new File("musique/Bits.wav"));
+        wp.open();//ouverture du flux 
+        wp.play();//lecture 
+        //wp.stop();//arret 
+        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
 			one_by_one("Mauvais choix");
 			Thread.sleep(1000);
 			one_by_one("\nListe de sort:\n-Heal {1}\n-Boule de feu mineure {2}\n\nJe choisis: ");
 			str = sc.nextLine();
+			wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();//ouverture du flux 
+	        wp.play();//lecture 
+	        //wp.stop();//arret 
+	        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 		}
 		return (Integer.parseInt(str) - 1);
 	}
@@ -311,10 +384,14 @@ public class class1 extends JPanel {
 		}	
 	}
 	
-	static void village(Fenetre fen) throws InterruptedException {
+	static void village(Fenetre fen, musique wp, musique2 mus) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		int a = 0;
 		
+		mus.close();
+		mus = new musique2(new File("musique/Ambiance song/village.wav"));
+        mus.open();
+        mus.play_boucle();
 		for (int i = 0; i < 50; ++i) System.out.println();
 		System.out.print("Le calme reviens, les habitants te remercie et reprennent leur occupation respective...");
 		Thread.sleep(1000);
@@ -325,6 +402,11 @@ public class class1 extends JPanel {
 		while (true) {
 			System.out.print("\n->");
 			String str = sc.nextLine();
+			wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();//ouverture du flux 
+	        wp.play();//lecture 
+	        //wp.stop();//arret 
+	        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 			if (str.equals("help")) {
 				System.out.print("\n-> Tapez inv pour voir votre inventaire");
 				System.out.print("\n-> Tapez stat pour voir vos statistique");
@@ -380,13 +462,17 @@ public class class1 extends JPanel {
 			if (str.equals("quest") && a == 1) {
 				Thread.sleep(1000);
 				for (int i = 0; i < 50; ++i) System.out.println();
+				mus.close();
+				mus = new musique2(new File("musique/Ambiance song/song.wav"));
+		        mus.open();
+		        mus.play();
 				System.out.print("C'est parti, vous prenez votre courage à deux mains et partez détruire ce dragon !");
 				Thread.sleep(1000);
-				quest(fen);
+				quest(fen, wp, mus);
 			}
 		}
 	}
-	static void quest(Fenetre fen) throws InterruptedException {
+	static void quest(Fenetre fen, musique wp, musique2 mus) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		
 		one_by_one("\n\nVous vous retrouvez à une intersection, à droite ce trouve un long chemin contournant la forêt");
@@ -398,16 +484,26 @@ public class class1 extends JPanel {
 	    one_by_one("-Retourner au village {3}");
 	    one_by_one("\n\nje choisis: ");
 	    String str = sc.nextLine();
+	    wp = new musique(new File("musique/Bits.wav"));
+        wp.open();//ouverture du flux 
+        wp.play();//lecture 
+        //wp.stop();//arret 
+        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 	    while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2 && Integer.parseInt(str) != 3) {
 			one_by_one("Mauvais choix\n\n\n");
 			one_by_one("\nje choisis: ");
 			str = sc.nextLine();
+			wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();//ouverture du flux 
+	        wp.play();//lecture 
+	        //wp.stop();//arret 
+	        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 		}
 	    if (Integer.parseInt(str) == 1) {
-	    	chemin_long(fen);
+	    	chemin_long(fen, wp, mus);
 	    }
 	    if (Integer.parseInt(str) == 2) {
-	    	chemin_court(fen);
+	    	chemin_court(fen, wp, mus);
 	    }
 	    if (Integer.parseInt(str) == 3) {
 	    	one_by_one("\nTu ne te sens pas prêt à affronté le dragon, tu rebrousses chemin...");
@@ -416,7 +512,7 @@ public class class1 extends JPanel {
 	    	return;
 	    }
 	}
-	static void chemin_long(Fenetre fen) throws InterruptedException {
+	static void chemin_long(Fenetre fen, musique wp, musique2 mus) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		
 		one_by_one("\nTu choisis de contourner la fôret pour retrouver le dragon.\n");
@@ -435,7 +531,11 @@ public class class1 extends JPanel {
 		Thread.sleep(1000);
 		fen.setContentPane(com);
 	    fen.setVisible(true);
-		combat_squelette(fen);
+		combat_squelette(fen, wp, mus);
+		mus.close();
+		mus = new musique2(new File("musique/Ambiance song/song.wav"));
+        mus.open();
+        mus.play_boucle();
 		fen.setContentPane(cse);
 	    fen.setVisible(true);
 		one_by_one("Une fois le squelette battu, tu as à peine le temps de récupérer ton souffle, que t'entends d'autres coups et bruits venant des autres chambres.\n");
@@ -451,10 +551,16 @@ public class class1 extends JPanel {
 		one_by_one("Je continue {2}");
 		one_by_one("\n\nje choisis: ");
 		String str = sc.nextLine();
+		wp = new musique(new File("musique/Bits.wav"));
+        wp.open();
+        wp.play();
 		while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2) {
 			one_by_one("Mauvais choix\n\n\n");
 			one_by_one("\nje choisis: ");
 			str = sc.nextLine();
+			wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();
+	        wp.play();
 		}
 		if (Integer.parseInt(str) == 1) {
 			one_by_one("Tu te réveilles le lendemain, prêt à partir combattre ! **Force +1**");
@@ -468,30 +574,38 @@ public class class1 extends JPanel {
 				System.exit(0);
 			}
 		}
-		dragon(fen);
+		dragon(fen, wp, mus);
     }
-	static void chemin_court(Fenetre fen) throws InterruptedException {
+	static void chemin_court(Fenetre fen, musique wp, musique2 mus) throws Exception {
 		one_by_one("En traversant la fôret, tu trébuche et tu tombes sur des ronces. **PV -2**\n");
-		dragon(fen);
+		dragon(fen, wp, mus);
 	}
-	static void dragon(Fenetre fen) throws InterruptedException {
+	static void dragon(Fenetre fen, musique wp, musique2 mus) throws Exception {
 		one_by_one("Après une montée intense sur la montagne la plus haute de toutes les terres connu, tu arrive enfin au sommet.\n");
 		one_by_one("Tu monte sur un plateau avec quelques rochers. Après avoir avancé quelques pas, tu entends un grand soufle.\n");
 		one_by_one("Tu ne bouge plus pendant quelques secondes, espérant que le dragon ne t'ai pas vu. Et la tu te rend compte qu'il dort.\n");
 		one_by_one("Tu te raproche en fesant attention où tu poses tes pieds. Une fois près du dragon, tu récupère une épée tellement grande, que tu peine à la manier à 2 mains et tu plantes cet épée dans une de ses ailes.\n");
 		one_by_one("Le dragon se réveil en hurlant, et essaye de décoller mais ne peut pas car l'épée est resté planté dans une de ses ailes\n");
 		one_by_one("Le dragon se retourne alors et crache du feu. Tu réussis juste à temps de te cacher derrière un rocher.\n");
-		combat_dragon(fen);
+		combat_dragon(fen, wp, mus);
+		mus.close();
+		mus = new musique2(new File("musique/hyper.wav"));
+        mus.open();
+        mus.play_boucle();
 		one_by_one("Tu as réussis à battre le dragon ! Tu prend le trésor gardé par le trésor et tu repart dans le village.\n");
 		one_by_one("Vous retournez voir Meunier. Voici votre récompense ! Une brindille !\n");
 		perso.inv[0] = "brindille";
 		one_by_one("\n\n\nMerci d'avoir joué à notre pre-alpha !");
 	}
-	static void combat_squelette(Fenetre fen) throws InterruptedException {
+	static void combat_squelette(Fenetre fen, musique wp, musique2 mus) throws Exception {
 		int i = 0;
 		int te = 0;
 		int sr = 0;
 		int save = 0;
+		mus.close();
+		mus = new musique2(new File("musique/Battle song/battle.wav"));
+        mus.open();
+        mus.play_boucle();
 		Scanner sc = new Scanner(System.in);
 		String str;
 		monster.vie = 25;
@@ -512,6 +626,11 @@ public class class1 extends JPanel {
 	        one_by_one("\n-Fuir {4}");
 	        one_by_one("\nje choisis: ");
 	        str = sc.nextLine();
+	        wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();//ouverture du flux 
+	        wp.play();//lecture 
+	        //wp.stop();//arret 
+	        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 	        while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2 && Integer.parseInt(str) != 3 && Integer.parseInt(str) != 4) {
 				one_by_one("Mauvais choix\n\n\n");
 				one_by_one("\n-Attaquer {1} *Force*");
@@ -520,6 +639,11 @@ public class class1 extends JPanel {
 		        one_by_one("\n-Fuir {4}");
 				one_by_one("\nje choisis: ");
 				str = sc.nextLine();
+				wp = new musique(new File("musique/Bits.wav"));
+		        wp.open();//ouverture du flux 
+		        wp.play();//lecture 
+		        //wp.stop();//arret 
+		        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 			}
 	        sr = Integer.parseInt(str);
 	        if (sr == 1) {
@@ -529,7 +653,7 @@ public class class1 extends JPanel {
 	        	one_by_one(" dégats au squelette");
 	        }
 	        if (sr == 2 && (Stats.intelligence + weapon.intelligence) >= 5) {
-	        	te = spell_menu(str);
+	        	te = spell_menu(str, wp);
 	        	one_by_one("\nVous lancer le sort *|");
 	        	one_by_one(perso.spell[te]);
 	        	one_by_one(" |* !!!");
@@ -593,11 +717,15 @@ public class class1 extends JPanel {
 			Thread.sleep(70);
 		}
 	}
-	static void combat_dragon(Fenetre fen) throws InterruptedException {
+	static void combat_dragon(Fenetre fen, musique wp, musique2 mus) throws Exception {
 		int i = 0;
 		int te = 0;
 		int sr = 0;
 		int save = 0;
+		mus.close();
+		mus = new musique2(new File("musique/Battle song/battle.wav"));
+        mus.open();
+        mus.play_boucle();
 		Scanner sc = new Scanner(System.in);
 		String str;
 		monster.vie = 40;
@@ -616,6 +744,11 @@ public class class1 extends JPanel {
 	        one_by_one("\n-Fuir {4}");
 	        one_by_one("\nje choisis: ");
 	        str = sc.nextLine();
+	        wp = new musique(new File("musique/Bits.wav"));
+	        wp.open();//ouverture du flux 
+	        wp.play();//lecture 
+	        //wp.stop();//arret 
+	        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 	        while (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2 && Integer.parseInt(str) != 3 && Integer.parseInt(str) != 4) {
 				one_by_one("Mauvais choix\n\n\n");
 				one_by_one("\n-Attaquer {1} *Force*");
@@ -624,6 +757,11 @@ public class class1 extends JPanel {
 		        one_by_one("\n-Fuir {4}");
 				one_by_one("\nje choisis: ");
 				str = sc.nextLine();
+				wp = new musique(new File("musique/Bits.wav"));
+		        wp.open();//ouverture du flux 
+		        wp.play();//lecture 
+		        //wp.stop();//arret 
+		        //wp.close();//pour etre propre on ferme le flux quand il n'est plus utile :D 
 			}
 	        sr = Integer.parseInt(str);
 	        if (sr == 1) {
@@ -633,7 +771,7 @@ public class class1 extends JPanel {
 	        	one_by_one(" dégats au Dragon");
 	        }
 	        if (sr == 2 && (Stats.intelligence + weapon.intelligence) >= 5) {
-	        	te = spell_menu(str);
+	        	te = spell_menu(str, wp);
 	        	one_by_one("\nVous lancer le sort *|");
 	        	one_by_one(perso.spell[te]);
 	        	one_by_one(" |* !!!");
@@ -902,4 +1040,88 @@ class Combat_squ_end extends JPanel {
     public void paintComponent(Graphics g) {
        g.drawImage(buffer,0,0,null);
      }
+}
+	
+class musique {
+	private static Clip clip = null;
+    private static AudioInputStream audioStream = null;
+    
+    public musique(File f) throws Exception{
+        audioStream = AudioSystem.getAudioInputStream(f);//recuperation d'un stream de type audo sur le fichier
+        AudioFormat audioFormat = audioStream.getFormat();//recuperation du format de son
+        //recuperation du son que l'on va stoquer dans un oblet de type clip
+        DataLine.Info info = new DataLine.Info(
+                Clip.class, audioStream.getFormat(),
+                ((int) audioStream.getFrameLength() * audioFormat.getFrameSize()));
+        //recuperation d'une instance de type Clip
+        clip = (Clip) AudioSystem.getLine(info);
+    }
+    public boolean open(){ 
+        if(clip != null && !clip.isOpen())//teste pour ne pas le faire dans le vent 
+            try { 
+                clip.open(audioStream); 
+            } catch (Exception e) { 
+                e.printStackTrace();//pour le debugage 
+                return false; 
+            } 
+        return true; 
+    }
+    public void close(){ 
+        if(clip != null && clip.isOpen())
+            clip.close(); 
+    }
+    public void play(){ 
+        if(clip != null && clip.isOpen())
+        	clip.start();
+    }
+    public void play_boucle() {
+    	if (clip != null && clip.isOpen())
+    		clip.loop(Integer.MAX_VALUE);
+    }
+    public void stop(){ 
+        if(clip != null && clip.isOpen()) 
+            clip.stop(); 
+    }
+}
+
+class musique2 {
+	private static Clip clip = null;
+    private static AudioInputStream audioStream = null;
+    
+    public musique2(File f) throws Exception{
+        audioStream = AudioSystem.getAudioInputStream(f);//recuperation d'un stream de type audo sur le fichier
+        AudioFormat audioFormat = audioStream.getFormat();//recuperation du format de son
+        //recuperation du son que l'on va stoquer dans un oblet de type clip
+        DataLine.Info info = new DataLine.Info(
+                Clip.class, audioStream.getFormat(),
+                ((int) audioStream.getFrameLength() * audioFormat.getFrameSize()));
+        //recuperation d'une instance de type Clip
+        clip = (Clip) AudioSystem.getLine(info);
+    }
+    public boolean open(){ 
+        if(clip != null && !clip.isOpen())//teste pour ne pas le faire dans le vent 
+            try { 
+                clip.open(audioStream); 
+            } catch (Exception e) { 
+                e.printStackTrace();//pour le debugage 
+                return false; 
+            } 
+        return true; 
+    }
+    public void close(){ 
+        if(clip != null && clip.isOpen())
+            clip.close(); 
+    }
+    public void play(){ 
+        if(clip != null && clip.isOpen())
+        	clip.start();
+    }
+    public void play_boucle() {
+    	if (clip != null && clip.isOpen())
+    		clip.loop(Integer.MAX_VALUE);
+    }
+    public void stop(){ 
+        if(clip != null && clip.isOpen()) 
+            clip.stop(); 
+    }
 }
