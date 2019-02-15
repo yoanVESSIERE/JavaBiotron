@@ -18,7 +18,7 @@ Le programme affichera une fenetre de taille 1920x700 à la position x0 et y0 et
 [Java](https://www.java.com/fr/)
 
 
-## Author
+## Créateur
 
 * **Yoan VESSIERE**
 * **Michael FABRIE**
